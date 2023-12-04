@@ -259,6 +259,10 @@ namespace SchoolProject2.Controllers
         ///     "teacherlname":"Liang"
         /// }
         /// </example>
+        /// <example>
+        /// curl -d @teacher.json -H "Content-Type: application/json"
+        /// http://localhost52959/api/Teacherdata/AddTeacher
+        /// </example>
         /// AFTER ADD, DELETE we wil focus on the api directly
         
         [HttpPost]
@@ -292,11 +296,31 @@ namespace SchoolProject2.Controllers
         }
 
         //new method deleting a Teacher
+        /// <summary>
+        /// Delete a Teacher in the System
+        /// </summary>
+        /// <param name="TeacherId">The Teacher Id in the system</param>
+        /// <return>
+        /// </return>
+        /// <example>
+        /// POST api/TeacherData/DeleteTeacher/15 --> 
+        /// </example>
         [HttpPost]
-        [Route("api/TeacherData/DeleteTeacher")]
-        public string DeleteTeacher()
+        [Route("api/TeacherData/DeleteTeacher/{TeacherId}")]
+        public void DeleteTeacher(int TeacherId)
         {
-            return "I want to delete a teacher";
+            MySqlConnection Conn = School.AccessDatabase();
+
+            Conn.Open();
+
+            MySqlCommand cmd = Conn.CreateCommand();
+
+            string query = "delete from teachers where teacherid=@teacherid";
+            cmd.CommandText = query;
+            cmd.Parameters.AddWithValue("@teacherid", TeacherId);
+            cmd.Prepare();
+            cmd.ExecuteNonQuery();
+            Conn.Close();
         }
     }
 }

@@ -84,11 +84,31 @@ namespace SchoolProject.Controllers
 
             //go back to the original list of teachers
 
+        return RedirectToAction("List");
+         }
 
+        //GET: /Teacher/DeleteConfirm/{teacherId}
+        [HttpGet]
+        public ActionResult DeleteConfirm(int id)
+        
+        {
 
+            TeacherDataController Controller = new TeacherDataController();
+            Teacher SelectedTeacher = Controller.FindTeacher(id);
 
+            return View(SelectedTeacher);
+        }
 
-            return RedirectToAction("List");
+        //POST: /Teacher/Delete/{TeacherId}
+        [HttpPost]
+        public ActionResult Delete(int id) 
+        {
+            TeacherDataController Controller = new TeacherDataController();
+            Controller.DeleteTeacher(id);
+
+            return RedirectToAction("List");    
+        
         }
     }
+
 }

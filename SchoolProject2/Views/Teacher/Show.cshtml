@@ -8,8 +8,10 @@
     ViewBag.Title = "Show";
 }
 
+<a style="color:darkred;" href="/Teacher/DeleteConfirm/@Model.teacherId ">Delete Teacher</a>
+
 <!--Display the teacher first and lastname using the value from the Teacher model.-->
-<h2>teacher @Model.teacherfname @Model.teacherlname</h2>
+<h2>@Model.teacherfname @Model.teacherlname</h2>
 
 <!--Display a heading indicating the employee number of the teacher using the value from the Teacher model.-->
 <p>emp no @Model.employeenumber</p>
