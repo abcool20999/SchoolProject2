@@ -73,6 +73,10 @@ namespace SchoolProject.Controllers
 
         public ActionResult Create(Teacher newTeacher)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("New");
+            }
             //Capture teacher information posted to us
 
             Debug.WriteLine("I have received teacher name" + newTeacher.teacherfname);
